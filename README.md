@@ -102,7 +102,8 @@ DeviceNetworkEvents
 
 ## Chronological Event Timeline 
 
-##TOR Browser Download Detected
+### TOR Browser Download Detected
+
  The user initiated a download of the TOR Browser installation package. This was identified through telemetry showing browser-based downloads of files containing "tor" in their names or originating from known TOR-related domains (e.g., torproject.org).
 
 
