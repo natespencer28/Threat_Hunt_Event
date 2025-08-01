@@ -107,27 +107,132 @@ DeviceNetworkEvents
  The user initiated a download of the TOR Browser installation package. This was identified through telemetry showing browser-based downloads of files containing "tor" in their names or originating from known TOR-related domains (e.g., torproject.org).
 
 
-##TOR Browser Installation Confirmed
+### TOR Browser Installation Confirmed
+
  Post-download, file creation events show that the user extracted or installed the TOR Browser onto their device. This was evidenced by the appearance of the "Tor Browser" folder in the user’s directory and associated file execution activity.
 
 
-##Execution of TOR Browser
+###Execution of TOR Browser
+
  The user launched firefox.exe from within the "Tor Browser" directory, confirming that the application was executed rather than simply downloaded. This process was run under the user’s account, with command-line and file path data consistent with the TOR Browser bundle.
 
 
-##Outbound Network Connections via TOR
+###Outbound Network Connections via TOR
+
  Once executed, the TOR Browser initiated outbound network connections. These connections were identified as originating from firefox.exe located in the "Tor Browser" folder, with several connections targeting public IP addresses across ports commonly associated with TOR relays (e.g., 443, 9001). These outbound connections are consistent with TOR network bootstrap and anonymized browsing behavior.
 
 ---
 
-## Summary
-
-The user "employee" on the "threat-hunt-lab" device initiated and completed the installation of the TOR browser. They proceeded to launch the browser, establish connections within the TOR network, and created various files related to TOR on their desktop, including a file named `tor-shopping-list.txt`. This sequence of activities indicates that the user actively installed, configured, and used the TOR browser, likely for anonymous browsing purposes, with possible documentation in the form of the "shopping list" file.
-
----
 
 ## Response Taken
 
-TOR usage was confirmed on the endpoint `threat-hunt-lab` by the user `employee`. The device was isolated, and the user's direct manager was notified.
+Incident Response Report: Unauthorized TOR Browser Use
+Incident Number: IR-2025-XX
+ Date Reported: 2025-07-31
+ Reported By: Security Operations Team
+ Incident Type: Unauthorized Software Installation / Potential Data Exfiltration
+ Affected Host: nate-mde-vm
+ User Account: natertater
+ Severity Rating: Medium to High
+ Status: Under Containment
 
----
+1. Preparation
+The organization maintains security controls and detection mechanisms through Microsoft Defender for Endpoint (MDE) to identify unauthorized software usage.
+
+
+Policies are in place prohibiting the use of anonymizing or proxying tools such as the TOR Browser.
+
+
+Logging and monitoring via KQL queries in the MDE portal have been established for process execution, file downloads, and network traffic analysis.
+
+
+
+2. Detection & Analysis
+Time of Detection: [insert timestamp]
+ Detection Method: Microsoft Defender for Endpoint Advanced Hunting (KQL)
+Indicators:
+Download of a file named torbrowser-install.exe from a known TOR source.
+
+
+Creation of a folder named “Tor Browser” in the user profile directory.
+
+
+Execution of firefox.exe from the “Tor Browser” directory.
+
+
+Outbound network connections from the TOR Browser to public IPs on ports 443 and 9001.
+
+
+Absence of .onion URLs but potential anonymized traffic based on IP/port behavior.
+
+
+Initial Impact Assessment:
+Unauthorized software may bypass monitoring, obfuscate browsing behavior, and potentially be used for data exfiltration or access to restricted services.
+
+
+No direct indicators of data loss yet, but traffic destination is anonymized.
+
+
+Users Involved:
+Username: natertater
+
+
+Device: nate-mde-vm
+
+
+
+3. Containment, Eradication, and Recovery
+Containment Actions Taken:
+Isolated the affected device from the network for investigation.
+
+
+Blocked torproject.org and known TOR IP addresses at the network perimeter.
+
+
+Disabled user account pending further review (if policy dictates).
+
+
+Eradication:
+TOR Browser and related files have been removed from the affected system.
+
+
+Registry and scheduled task reviews show no persistence mechanisms.
+
+
+Recovery:
+Device was reimaged or restored to a clean state.
+
+
+User will be reissued a compliant workstation pending completion of disciplinary review and user re-education.
+
+
+Endpoint monitoring and network controls updated to enhance detection of similar future attempts.
+
+
+
+4. Post-Incident Activity
+Lessons Learned:
+Need to tighten application whitelisting to prevent unauthorized installs.
+
+
+Existing detection worked, but policy enforcement can be strengthened.
+
+
+Periodic user awareness training must reinforce the risks of anonymizing tools.
+
+
+Preventative Measures:
+Deploy application control (e.g., Windows Defender Application Control or AppLocker).
+
+
+Expand monitoring to include .onion gateway indicators and TOR-related ports.
+
+
+Update incident response playbooks to include TOR-specific scenarios.
+
+
+Report Completed By:
+
+ Nate Spencer
+ Cyber Security Support 
+ 07-31-2025
