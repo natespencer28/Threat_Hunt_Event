@@ -102,19 +102,19 @@ DeviceNetworkEvents
 
 ## Chronological Event Timeline 
 
-###TOR Browser Download Detected
+##TOR Browser Download Detected
  The user initiated a download of the TOR Browser installation package. This was identified through telemetry showing browser-based downloads of files containing "tor" in their names or originating from known TOR-related domains (e.g., torproject.org).
 
 
-###TOR Browser Installation Confirmed
+##TOR Browser Installation Confirmed
  Post-download, file creation events show that the user extracted or installed the TOR Browser onto their device. This was evidenced by the appearance of the "Tor Browser" folder in the user’s directory and associated file execution activity.
 
 
-###Execution of TOR Browser
+##Execution of TOR Browser
  The user launched firefox.exe from within the "Tor Browser" directory, confirming that the application was executed rather than simply downloaded. This process was run under the user’s account, with command-line and file path data consistent with the TOR Browser bundle.
 
 
-###Outbound Network Connections via TOR
+##Outbound Network Connections via TOR
  Once executed, the TOR Browser initiated outbound network connections. These connections were identified as originating from firefox.exe located in the "Tor Browser" folder, with several connections targeting public IP addresses across ports commonly associated with TOR relays (e.g., 443, 9001). These outbound connections are consistent with TOR network bootstrap and anonymized browsing behavior.
 
 ---
